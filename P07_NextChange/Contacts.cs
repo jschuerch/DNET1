@@ -11,8 +11,6 @@ namespace P07_NextChange
     {
         private ICollection<Contact> contactList { get; set; }
         private Dictionary<String, Action<Contact, string>> mappingsRead;
-        private Dictionary<String, Func<Contact, string>> mappingsWrite;
-        private string columnsWrite;
 
         public Contacts()
         {
@@ -30,21 +28,6 @@ namespace P07_NextChange
             mappingsRead.Add("Strasse", (contact, value) => contact.HomeStreet = value);
             mappingsRead.Add("PLZ", (contact, value) => contact.HomePostalCode = value);
             mappingsRead.Add("Ort", (contact, value) => contact.HomeCity = value);
-
-            mappingsWrite = new Dictionary<string, Func<Contact, string>>();
-            mappingsWrite.Add("TelIntern", (contact) => contact.BusinessPhone);
-            mappingsWrite.Add("Nachname", (contact) => contact.LastName);
-            mappingsWrite.Add("Vorname", (contact) => contact.FirstName);
-            mappingsWrite.Add("PKZ", (contact) => contact.Initials);
-            mappingsWrite.Add("Gebaeude", (contact) => contact.OfficeLocation);
-            mappingsWrite.Add("Departement", (contact) => contact.Department);
-            mappingsWrite.Add("Taetigkeit", (contact) => contact.JobTitle);
-            mappingsWrite.Add("Kategorie", (contact) => contact.Categories);
-            mappingsWrite.Add("Strasse", (contact) => contact.HomeStreet);
-            mappingsWrite.Add("PLZ", (contact) => contact.HomePostalCode);
-            mappingsWrite.Add("Ort", (contact) => contact.HomeCity);
-
-            columnsWrite = "TelIntern;Nachname;Vorname;PKZ;Gebaeude;Departement;Taetigkeit;Kategorie;Strasse;PLZ;Ort";
         }
 
         public void ReadCSV(string filename)
@@ -78,7 +61,6 @@ namespace P07_NextChange
 
                 contactList.Add(c);
                 Console.WriteLine("Imported: " + c.FirstName + " " + c.LastName);
-                //Console.WriteLine(c.HomeStreet + "\n" + c.HomePostalCode + " " + c.HomeCity);
             }
 
             sr.Close();
@@ -87,6 +69,8 @@ namespace P07_NextChange
 
         public void WriteCSV(string filename)
         {
+            ((List<Contact>) contactList).Sort();
+
             if (File.Exists(filename))
             {
                 File.WriteAllText(filename, string.Empty);
@@ -95,14 +79,24 @@ namespace P07_NextChange
             StreamWriter sw = new StreamWriter(fs, Encoding.Unicode);
 
             sw.BaseStream.Seek(0, SeekOrigin.End);
-            sw.WriteLine(columnsWrite);
-            var headerCells = columnsWrite.Split(';');
+
+            var enumerator = Contact.GetFieldNames();
+            StringBuilder sb = new StringBuilder();
+            while (enumerator.MoveNext())
+            {
+                sb.Append(enumerator.Current);
+                sb.Append(";");
+            }
+            sb.Remove(sb.Length - 1, 1);
+
+            sw.WriteLine(sb.ToString());
+
             foreach (var contact in contactList)
             {
-                StringBuilder sb = new StringBuilder();
-                foreach(var h in headerCells)
+                sb = new StringBuilder();
+                foreach(var field in contact)
                 {
-                    sb.Append(mappingsWrite[h](contact));
+                    sb.Append(field);
                     sb.Append(";");
                 }
                 sb.Remove(sb.Length - 1, 1);

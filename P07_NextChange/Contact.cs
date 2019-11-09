@@ -65,6 +65,15 @@ namespace P07_NextChange
             }
         }
 
+        public static IEnumerator<string> GetFieldNames()
+        {
+            FieldInfo[] fi = typeof(Contact).GetFields();
+            foreach (FieldInfo f in fi)
+            {
+                yield return (string)f.Name;
+            }
+        }
+
         public Contact(string FirstName, string LastName,
                        string Company,
                        string Department, string JobTitle,
