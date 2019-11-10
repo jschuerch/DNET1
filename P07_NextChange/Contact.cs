@@ -131,10 +131,6 @@ namespace P07_NextChange
             HomeStreet = match.Groups["Street"].Value.Trim();
             HomePostalCode = match.Groups["PLZ"].Value.Trim();
             HomeCity = match.Groups["City"].Value.Trim();
-
-            /*Console.WriteLine(Initials);
-            Console.WriteLine(HomeStreet);
-            Console.WriteLine(HomePostalCode + " " + HomeCity);*/
         }
     }
 }
