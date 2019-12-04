@@ -1,0 +1,91 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.OleDb;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+namespace p9
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            IDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=../../app97.accdb;");
+            conn.Open();
+        }
+        static string path = @"d:\My Documents\ZHW\DNET\DNET8\";
+        static string strConnection = @"Provider=Microsoft.Jet.OLEDB.4.0;
+Data Source=" + path + "Contacts.mdb; Persist Security Info=False;";
+        // ladet den Datensatz
+        static void LoadTable(DataSet ds, string tableName)
+        {
+            OleDbConnection con = new OleDbConnection(strConnection);
+            //----- SelectCommand setzen
+            OleDbDataAdapter adapter =
+            new OleDbDataAdapter("SELECT * FROM " + tableName, con);
+            //-----füge Schema Information automatisch hinzu
+            adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            adapter.Fill(ds, tableName);
+            if (ds.HasErrors)
+            {
+                ds.RejectChanges();
+                throw new Exception("Error Loading Data");
+            }
+            else ds.AcceptChanges();
+            adapter.Dispose();
+            Console.WriteLine("Loaded Table:" + tableName);
+        }
+        static void StoreTable(DataSet ds, string tableName)
+        {
+            OleDbConnection con = new OleDbConnection(strConnection);
+            //----- SelectCommand setzen, damit der OleDbCommandBuilder
+            automatisch
+            // Insert-, Update- und Delete-Kommandos generieren kann
+            OleDbDataAdapter adapter =
+            new OleDbDataAdapter("SELECT * FROM " + tableName, con);
+            OleDbCommandBuilder cmdBuilder = new OleDbCommandBuilder(adapter);
+            cmdBuilder.QuotePrefix = "["; cmdBuilder.QuoteSuffix = "]";
+            //----- Daten speichern!
+            adapter.Update(ds, tableName);
+            adapter.Dispose();
+            Console.WriteLine("Stored Table:" + tableName);
+        }
+        static void Print(DataSet ds)
+        {
+            Console.WriteLine("DataSet {0}:", ds.DataSetName);
+            Console.WriteLine();
+            foreach (DataTable t in ds.Tables)
+            {
+                Print(t);
+                Console.WriteLine();
+            }
+        }
+        static void Print(DataTable t)
+        {
+            //---- Tabellenkopf
+            Console.WriteLine("Tabelle {0}:", t.TableName);
+            foreach (DataColumn col in t.Columns)
+            {
+                Console.Write(col.ColumnName + "|");
+            }
+            Console.WriteLine();
+            for (int i = 0; i < 40; i++) { Console.Write("-"); }
+            Console.WriteLine();
+            //---- Daten
+            int nrOfCols = t.Columns.Count;
+            foreach (DataRow row in t.Rows)
+            {
+                for (int i = 0; i < nrOfCols; i++)
+                {
+                    Console.Write(row[i]); Console.Write("|");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
