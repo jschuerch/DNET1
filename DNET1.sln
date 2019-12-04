@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P09_ADO.NET_form", "P09_ADO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P10_BMI", "P10_BMI\P10_BMI.csproj", "{06B87445-718B-4AED-94BE-98AE9F425CA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P11_BMI_2", "P11_BMI_2\P11_BMI_2.csproj", "{17191274-1B56-44D2-A4A2-C73DE8410163}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{06B87445-718B-4AED-94BE-98AE9F425CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06B87445-718B-4AED-94BE-98AE9F425CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06B87445-718B-4AED-94BE-98AE9F425CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17191274-1B56-44D2-A4A2-C73DE8410163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17191274-1B56-44D2-A4A2-C73DE8410163}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17191274-1B56-44D2-A4A2-C73DE8410163}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17191274-1B56-44D2-A4A2-C73DE8410163}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
