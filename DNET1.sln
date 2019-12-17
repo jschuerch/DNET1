@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P10_BMI", "P10_BMI\P10_BMI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P11_BMI_2", "P11_BMI_2\P11_BMI_2.csproj", "{17191274-1B56-44D2-A4A2-C73DE8410163}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "P13_VB", "P13_VB\P13_VB.vbproj", "{93C8027D-C109-435A-9C23-C8DC9026B023}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{17191274-1B56-44D2-A4A2-C73DE8410163}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17191274-1B56-44D2-A4A2-C73DE8410163}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17191274-1B56-44D2-A4A2-C73DE8410163}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93C8027D-C109-435A-9C23-C8DC9026B023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93C8027D-C109-435A-9C23-C8DC9026B023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93C8027D-C109-435A-9C23-C8DC9026B023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93C8027D-C109-435A-9C23-C8DC9026B023}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
