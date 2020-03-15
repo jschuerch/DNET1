@@ -70,6 +70,7 @@
     <Content Include="BMI.aspx" />
     <Content Include="BMIResult.aspx" />
     <Content Include="BMIWebService.asmx" />
+    <Content Include="TestCounter.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +93,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestCounter.aspx.cs">
+      <DependentUpon>TestCounter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestCounter.aspx.designer.cs">
+      <DependentUpon>TestCounter.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
